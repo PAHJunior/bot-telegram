@@ -6,10 +6,11 @@ let n1, n2
 
 const initmensage = (ctx) => {
   ctx.reply(
-`
+    `
 To calculate two numbers, write /calculate
 To know my contact, write /contact
-`)
+`
+  )
 }
 
 const Calculate = new Scenes.WizardScene(
@@ -21,7 +22,8 @@ const Calculate = new Scenes.WizardScene(
   (ctx) => {
     try {
       console.log(!Number.isInteger(Number.parseInt(ctx.message.text)))
-      if (!Number.isInteger(Number.parseInt(ctx.message.text))) throw new Error('Number invalid')
+      if (!Number.isInteger(Number.parseInt(ctx.message.text)))
+        throw new Error('Number invalid')
       n1 = Number.parseInt(ctx.message.text)
 
       ctx.reply('Send your second number:')
@@ -35,15 +37,16 @@ const Calculate = new Scenes.WizardScene(
   async (ctx) => {
     try {
       console.log(!Number.isInteger(Number.parseInt(ctx.message.text)))
-      if (!Number.isInteger(Number.parseInt(ctx.message.text))) throw new Error('Number invalid')
+      if (!Number.isInteger(Number.parseInt(ctx.message.text)))
+        throw new Error('Number invalid')
       n2 = Number.parseInt(ctx.message.text)
-  
+
       await ctx.reply(`${n1} + ${n2} = ${n1 + n2}`)
       await ctx.reply(`${n1} - ${n2} = ${n1 - n2}`)
       await ctx.reply(`${n1} * ${n2} = ${n1 * n2}`)
       await ctx.reply(`${n1} / ${n2} = ${n1 / n2}`)
       await ctx.reply('👍')
-      
+
       return ctx.scene.leave()
     } catch (error) {
       console.log(error)
@@ -52,7 +55,7 @@ const Calculate = new Scenes.WizardScene(
     }
   }
 )
-  
+
 const stage = new Scenes.Stage([Calculate])
 bot.use(session())
 bot.use(stage.middleware())
@@ -75,11 +78,11 @@ bot.command('contact', async (ctx) => {
 
 const startBot = async () => {
   try {
-      // await bot.launch()
-      await bot.startWebhook('/secret-path', null, 5000)
-      console.log('Bot started successfully')
-  } catch(error) {
-      console.error(error)
+    await bot.launch()
+    // await bot.startWebhook('/', null, 5000)
+    console.log('Bot started successfully')
+  } catch (error) {
+    console.error(error)
   }
 }
 
