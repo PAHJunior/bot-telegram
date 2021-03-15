@@ -75,7 +75,8 @@ bot.command('contact', async (ctx) => {
 
 const startBot = async () => {
   try {
-      await bot.launch()
+      // await bot.launch()
+      await bot.startWebhook('/secret-path', null, 5000)
       console.log('Bot started successfully')
   } catch(error) {
       console.error(error)
