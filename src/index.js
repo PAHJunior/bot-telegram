@@ -82,7 +82,7 @@ const startBot = async () => {
       webhook: {
         domain: process.env.BOT_URL,
         // domain: 'https://---.localtunnel.me',
-        port: 3000
+        port: process.env.PORT || 3000
       }
     })
     console.log('Bot started successfully')
@@ -92,3 +92,7 @@ const startBot = async () => {
 }
 
 startBot()
+
+// Enable graceful stop
+process.once('SIGINT', () => bot.stop('SIGINT'))
+process.once('SIGTERM', () => bot.stop('SIGTERM'))
