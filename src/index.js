@@ -78,8 +78,13 @@ bot.command('contact', async (ctx) => {
 
 const startBot = async () => {
   try {
-    await bot.launch()
-    // await bot.startWebhook('/', null, 5000)
+    await bot.launch({
+      webhook: {
+        domain: process.env.BOT_URL,
+        // domain: 'https://---.localtunnel.me',
+        port: 3000
+      }
+    })
     console.log('Bot started successfully')
   } catch (error) {
     console.error(error)
